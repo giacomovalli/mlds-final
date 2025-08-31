@@ -60,3 +60,14 @@ uv run python main.py --volatility_clustering --year 2023
 # Gain/loss asymmetry analysis
 uv run python main.py --gainloss --year 2023
 ```
+
+## Command Line Arguments
+
+### Core Arguments
+
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| `--train` | flag | - | Run model training |
+| `--test` | flag | - | Test loaded model and generate analysis plots |
+| `--summary` | flag | - | Display model architecture summary |
+| `--load-model` | str | - | Load a saved model using prefix (e.g., `w120_l32_e50`) |
