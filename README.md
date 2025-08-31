@@ -28,3 +28,35 @@ This project uses `uv` for dependency management. Install dependencies with:
 ```bash
 uv sync
 ```
+## Quick Start
+
+### Training a Model
+
+Train a basic STAAR model on the full dataset:
+
+```bash
+uv run python main.py --train --window 120 --latent_dim 32 --epochs 50 --batch_size 100
+```
+
+### Loading and Testing a Model
+
+Load a pre-trained model and perform analysis:
+
+```bash
+uv run python main.py --test --load-model w120_l32_e50 --window 120 --latent_dim 32
+```
+
+### Financial Analysis
+
+Perform various financial analyses on the dataset:
+
+```bash
+# Autocorrelation analysis
+uv run python main.py --autocorrelation --year 2023
+
+# Volatility clustering analysis
+uv run python main.py --volatility_clustering --year 2023
+
+# Gain/loss asymmetry analysis
+uv run python main.py --gainloss --year 2023
+```
