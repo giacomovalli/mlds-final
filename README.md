@@ -71,3 +71,41 @@ uv run python main.py --gainloss --year 2023
 | `--test` | flag | - | Test loaded model and generate analysis plots |
 | `--summary` | flag | - | Display model architecture summary |
 | `--load-model` | str | - | Load a saved model using prefix (e.g., `w120_l32_e50`) |
+
+### Model Configuration
+
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| `--window` | int | 120 | Sequence window size (time steps) |
+| `--batch_size` | int | 100 | Training batch size |
+| `--latent_dim` | int | 32 | Dimension of latent space |
+| `--epochs` | int | 10 | Number of training epochs |
+
+### Data Filtering
+
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| `--year` | str | - | Filter by year(s): single (`2023`) or multiple (`2022,2023,2024`) |
+| `--month` | str | - | Filter by month(s): single (`6`) or multiple (`1,6,12`) |
+
+### Analysis Options
+
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| `--autocorrelation` | flag | - | Analyze autocorrelation of price changes |
+| `--gainloss` | flag | - | Analyze gain/loss asymmetry patterns |
+| `--volatility_clustering` | flag | - | Analyze volatility clustering using GARCH |
+| `--volume_volatility_corr` | flag | - | Analyze volume-volatility correlation |
+| `--wavelets` | flag | - | Perform wavelet decomposition analysis |
+| `--stationarity` | flag | - | Test stationarity of price series |
+| `--fit-kde` | str | - | Fit KDE to specified column |
+| `--test-generation` | flag | - | Test generation quality with discriminator |
+
+### Advanced Options
+
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| `--kl-scaling-epochs` | int | 0 | Epochs for KL annealing (0 disables) |
+| `--kl-scaling-factor` | float | 1.0 | KL scaling factor |
+
+
