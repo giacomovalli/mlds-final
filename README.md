@@ -156,3 +156,22 @@ uv run python main.py --gainloss --year 2023
 uv run python main.py --test-generation --load-model w120_l32_e100_y2023 --window 120 --latent_dim 32
 ```
 
+## Model Architecture
+
+The STAAR model consists of:
+
+1. **Encoder**: LSTM + Multi-Head Attention � Latent Distribution
+2. **Decoder**: Dense � LSTM + Multi-Head Attention � Reconstruction
+3. **Latent Discriminator**: Ensures latent space follows prior distribution
+4. **Statistics Discriminator**: Enforces statistical properties of generated data
+
+### Key Components
+
+- **Multi-Head Attention**: Captures long-range dependencies in time series
+- **Cholesky Parameterization**: Full covariance matrix in latent space
+- **Custom Loss Functions**:
+  - Gaussian NLL for reconstruction
+  - KL divergence with optional free-bit regularization
+  - Garman-Klass volatility loss
+  - GARCH-based temporal loss
+  - Custom standard deviation preservation loss
