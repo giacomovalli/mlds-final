@@ -108,4 +108,51 @@ uv run python main.py --gainloss --year 2023
 | `--kl-scaling-epochs` | int | 0 | Epochs for KL annealing (0 disables) |
 | `--kl-scaling-factor` | float | 1.0 | KL scaling factor |
 
+## Usage Examples
+
+### Basic Training
+
+Train a model on 2023 data with standard parameters:
+
+```bash
+uv run python main.py --train --year 2023 --window 120 --latent_dim 32 --epochs 100 --batch_size 128
+```
+
+### Multi-Year Training
+
+Train on multiple years with larger latent space:
+
+```bash
+uv run python main.py --train --year 2019,2020,2021,2022 --window 120 --latent_dim 64 --epochs 200
+```
+
+### Seasonal Analysis
+
+Train and analyze specific months across multiple years:
+
+```bash
+# Train on January data from multiple years
+uv run python main.py --train --year 2019,2020,2021,2022 --month 1 --epochs 150
+
+# Test the trained model
+uv run python main.py --test --load-model w120_l32_e150_y2019_2020_2021_2022_m1 --window 120 --latent_dim 32
+```
+
+### Comprehensive Analysis Pipeline
+
+```bash
+# 1. Train the model
+uv run python main.py --train --year 2023 --epochs 100 --window 120 --latent_dim 32
+
+# 2. Test and analyze
+uv run python main.py --test --load-model w120_l32_e100_y2023 --window 120 --latent_dim 32
+
+# 3. Perform stylized facts analysis
+uv run python main.py --autocorrelation --year 2023
+uv run python main.py --volatility_clustering --year 2023
+uv run python main.py --gainloss --year 2023
+
+# 4. Test generation quality
+uv run python main.py --test-generation --load-model w120_l32_e100_y2023 --window 120 --latent_dim 32
+```
 
