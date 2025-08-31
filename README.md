@@ -220,3 +220,7 @@ Built-in callbacks for robust training:
 - Model checkpointing
 - KL annealing scheduling
 - Negative reconstruction monitoring
+
+## License
+
+This project is freely and publicly available under the [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/deed.en) license for educational and research purposes in financial machine learning and time series analysis.
