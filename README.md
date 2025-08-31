@@ -175,3 +175,48 @@ The STAAR model consists of:
   - Garman-Klass volatility loss
   - GARCH-based temporal loss
   - Custom standard deviation preservation loss
+
+## Output Files
+
+### Model Files
+- `saved_models/`: Trained model components (.keras files)
+- Models are saved with descriptive prefixes (e.g., `w120_l32_e50_y2023`)
+
+### Analysis Plots
+- `plots/`: Visualization outputs
+  - Training loss curves
+  - Reconstruction comparisons (3x2 grid)
+  - t-SNE analysis plots
+  - Stylized facts analysis
+  - Generation quality assessments
+
+### Log Files
+Comprehensive logging includes:
+- Training progress and loss values
+- Model architecture details
+- Analysis results and statistics
+- Performance metrics and timing
+
+## Advanced Features
+
+### Custom Activation Function
+
+The model includes a `scaled_tanh` activation function that maps inputs to the range [-1, 2], designed specifically for financial data characteristics.
+
+### Multi-GPU Support
+
+Automatic detection and utilization of multiple GPUs using TensorFlow's MirroredStrategy:
+
+```bash
+# Training will automatically use available GPUs
+uv run python main.py --train --epochs 100 --batch_size 256
+```
+
+### Callbacks and Monitoring
+
+Built-in callbacks for robust training:
+- NaN detection and stopping
+- Early stopping based on validation loss
+- Model checkpointing
+- KL annealing scheduling
+- Negative reconstruction monitoring
