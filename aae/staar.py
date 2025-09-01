@@ -76,7 +76,7 @@ class StaarModel:
         
         return Model(inputs, outputs, name='encoder')
 
-    def _build_decoder(self):
+    def _build_decoder_o(self):
         inputs = layers.Input(shape=(self.latent_dim,))
         x = layers.Dense(self.time_steps * self.lstm_units, activation='tanh')(inputs)
         x = layers.Reshape((self.time_steps, self.lstm_units))(x)
@@ -96,7 +96,7 @@ class StaarModel:
             lstm_output = layers.LSTM(self.lstm_units, return_sequences=True)(x)
             x = layers.LayerNormalization()(lstm_output + orig_input)
 
-        mean = layers.TimeDistributed(layers.Dense(self.output_features, activation=scaled_tanh))(x)
+        mean = layers.TimeDistributed(layers.Dense(self.output_features))(x)
         log_var = layers.TimeDistributed(layers.Dense(self.output_features))(x)
         outputs = layers.Concatenate()([mean, log_var])
         return Model(inputs, outputs, name='decoder')
@@ -130,7 +130,7 @@ class StaarModel:
         outputs = layers.Concatenate()([mean, log_var])
         return Model(inputs, outputs, name='decoder')
 
-    def _build_decoder_r(self):
+    def _build_decoder(self):
         inputs = layers.Input(shape=(self.latent_dim,))
         x = layers.Dense(self.time_steps * self.lstm_units, activation='tanh')(inputs)
         x = layers.Reshape((self.time_steps, self.lstm_units))(x)
